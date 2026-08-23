@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@layer base {
+    h1 {
+        @apply text-4xl md:text-5xl font-bold text-gray-100 tracking-tight;
+    }
+
+    h2 {
+        @apply text-lg font-medium text-gray-300;
+    }
+
+    h3 {
+        @apply text-xs tracking-widest uppercase font-light text-gray-400 mb-4;
+    }
+
+    p {
+        @apply text-gray-400 leading-relaxed;
+    }
+
+    ul {
+        @apply text-sm text-gray-400 space-y-2 flex flex-col;
+    }
+
+    p a {
+        @apply text-gray-300 underline decoration-gray-600 underline-offset-4 hover:decoration-gray-300 transition-colors;
+    }
+}
