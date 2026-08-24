@@ -15,7 +15,7 @@
     }
 
     p {
-        @apply text-gray-400 leading-relaxed;
+        @apply text-gray-400 leading-relaxed my-4;
     }
 
     ul {
@@ -30,10 +30,13 @@
         @apply border-[#222] my-8;
     }
 
-    pre.astro-code {
-        @apply bg-[#111111]! p-6! my-4! rounded-lg! border! border-[#222]! text-sm! leading-relaxed!;
+    pre {
+        @apply bg-[#111111] p-6 my-4 rounded-lg border border-[#222] text-sm leading-relaxed overflow-x-auto;
     }
 
+    pre code {
+        @apply bg-transparent p-0 border-none text-inherit;
+    }
     :not(pre) > code {
         @apply text-gray-300 bg-[#222] px-1.5 pb-1 pt-1.5 rounded font-normal;
     }
