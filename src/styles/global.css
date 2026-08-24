@@ -26,6 +26,10 @@
         @apply text-gray-300 underline decoration-gray-600 underline-offset-4 hover:decoration-gray-300 transition-colors;
     }
 
+    hr {
+        @apply border-[#222] my-8;
+    }
+
     pre.astro-code {
         @apply bg-[#111111]! p-6! my-4! rounded-lg! border! border-[#222]! text-sm! leading-relaxed!;
     }

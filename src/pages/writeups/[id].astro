@@ -24,13 +24,11 @@ const formattedDate = post.data.date
 
 <Layout title={post.data.title} description={post.data.description}>
     <div>
-        <!-- Navigation / Back Button -->
         <a href="/" class="text-sm"> return home </a>
 
-        <!-- Header Section -->
         <header class="mb-4 mt-4">
             <p class="text-sm text-gray-500">{formattedDate}</p>
-            <h1 class="text-3xl font-bold text-gray-100">
+            <h1>
                 {post.data.title}
             </h1>
         </header>

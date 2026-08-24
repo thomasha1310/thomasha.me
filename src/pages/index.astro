@@ -2,11 +2,18 @@
 import Layout from "../layouts/Layout.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
-type Writeup = CollectionEntry<"writeups">;
+type ContentItem = CollectionEntry<"writeups"> | CollectionEntry<"projects">;
 
 const writeups = await getCollection("writeups");
 const sortedWriteups = writeups.sort(
-    (a: Writeup, b: Writeup) => b.data.date.valueOf() - a.data.date.valueOf(),
+    (a: ContentItem, b: ContentItem) =>
+        b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const projects = await getCollection("projects");
+const sortedProjects = projects.sort(
+    (a: ContentItem, b: ContentItem) =>
+        b.data.date.valueOf() - a.data.date.valueOf(),
 );
 ---
 
@@ -74,10 +81,11 @@ const sortedWriteups = writeups.sort(
                     >
                     <div class="flex flex-col">
                         <a
-                            href="https://github.com/thomasha1310/your-repo"
+                            href="/projects/tetragon"
                             class="text-gray-200 font-medium hover:text-white transition-colors"
-                            target="_blank">tetragon</a
                         >
+                            tetragon
+                        </a>
                         <p class="text-sm mt-1">
                             a full-stack tournament logistics platform for
                             real-time operations. used by the <a
@@ -96,10 +104,11 @@ const sortedWriteups = writeups.sort(
                     >
                     <div class="flex flex-col">
                         <a
-                            href="https://github.com/thomasha1310/another-repo"
+                            href="/projects/phishfence"
                             class="text-gray-200 font-medium hover:text-white transition-colors"
-                            target="_blank">phishfence</a
                         >
+                            phishfence
+                        </a>
                         <p class="text-sm mt-1">
                             a phishing detection pipeline that explains its
                             reasoning. achieved 99.3% accuracy on a custom
@@ -114,7 +123,7 @@ const sortedWriteups = writeups.sort(
             <h3>WRITEUPS</h3>
             <div class="flex flex-col space-y-6 mt-4">
                 {
-                    sortedWriteups.map((post: Writeup) => (
+                    sortedWriteups.map((post: ContentItem) => (
                         <div class="flex flex-col sm:flex-row sm:gap-6">
                             <span class="text-sm text-gray-500 sm:w-16 shrink-0 sm:mt-0.5">
                                 {post.data.date
