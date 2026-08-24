@@ -1,12 +1,18 @@
 ---
-title: "picoCTF 2026: North-South"
-date: 2026
-description: "using tor to force international packet routing"
+title: "picoctf 2026"
+date: 2026-03
+description: "sharon high school cybersecurity club, competing as sharon cyber. top 3% team globally. earned 13500 of 14500 available points."
+---
+
+competing as sharon cyber. top 3% team globally.
+
 ---
 
 ## Tools Used
 
 - Tor (on Kali Linux)
+
+---
 
 ## Methodology
 

@@ -20,9 +20,22 @@ const sortedWriteups = writeups.sort(
             <p class="text-sm">
                 freshman @ brown university ⧸ applied math + computer science
             </p>
+            <div class="flex gap-4 text-sm">
+                <a href="mailto:hello@thomasha.me"> email </a>
+                <a href="https://github.com/thomasha1310" target="_blank">
+                    github
+                </a>
+                <a
+                    href="https://www.linkedin.com/in/thomasha1310/"
+                    target="_blank"
+                >
+                    linkedin
+                </a>
+                <a href="/resume.pdf" rel="noopener noreferrer" target="_blank">
+                    résumé
+                </a>
+            </div>
         </div>
-
-        <h2>building secure systems and breaking insecure ones.</h2>
 
         <p>
             i'm an aspiring cybersecurity vulnerability researcher and software
@@ -33,7 +46,15 @@ const sortedWriteups = writeups.sort(
 
         <div>
             <h3>CURRENTLY</h3>
-            <p></p>
+            <p>
+                <a
+                    href="https://github.com/thomasha1310/clox-interpreter"
+                    target="_blank">implementing</a
+                > the <a
+                    href="https://craftinginterpreters.com/the-lox-language.html"
+                    target="_blank">lox programming language</a
+                > in C using a bytecode interpreter
+            </p>
         </div>
 
         <div>
@@ -99,7 +120,8 @@ const sortedWriteups = writeups.sort(
                                 {post.data.date
                                     .toLocaleDateString("en-US", {
                                         month: "short",
-                                        year: "2-digit",
+                                        year: "numeric",
+                                        timeZone: "UTC",
                                     })
                                     .toLowerCase()}
                             </span>
