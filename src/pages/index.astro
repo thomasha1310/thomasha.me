@@ -1,25 +1,123 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+type Writeup = CollectionEntry<"writeups">;
+
+const writeups = await getCollection("writeups");
+const sortedWriteups = writeups.sort(
+    (a: Writeup, b: Writeup) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
 ---
 
-<Layout title="home" description="Incoming APMA-CS at Brown University. Aspiring cybersecurity vulnerability researcher.">
-  <section class="space-y-8">
-    <div class="space-y-2">
-      <h1>thomas ha</h1>
-      <p class="text-sm">incoming @ brown university ⧸ applied math + computer science</p>
-    </div>
-    
-    <h2>building secure systems and breaking insecure ones.</h2>
-    
-    <p>
-      i'm an aspiring cybersecurity vulnerability researcher and software developer.
-      i spend my time researching vulnerabilities, participating in ctfs, and building minimal, resilient software infrastructure. 
-    </p>
+<Layout
+    title="home"
+    description="Incoming APMA-CS at Brown University. Aspiring cybersecurity vulnerability researcher."
+>
+    <section class="space-y-8">
+        <div class="space-y-2">
+            <h1>thomas ha</h1>
+            <p class="text-sm">
+                freshman @ brown university ⧸ applied math + computer science
+            </p>
+        </div>
 
-    <div>
-      <h3>currently</h3>
-      <p>finding bugs</p>
-      <p>taking classes</p>
-    </div>
-  </section>
+        <h2>building secure systems and breaking insecure ones.</h2>
+
+        <p>
+            i'm an aspiring cybersecurity vulnerability researcher and software
+            developer. i spend my time learning about vulnerabilities,
+            participating in ctfs, and building simple, resilient software
+            infrastructure.
+        </p>
+
+        <div>
+            <h3>CURRENTLY</h3>
+            <p></p>
+        </div>
+
+        <div>
+            <h3>COURSEWORK</h3>
+            <p>csci 0190 (accelerated intro to computer science) @ brown</p>
+            <p>math 0540 (linear algebra with theory) @ brown</p>
+            <p>math 230 (differential equations) @ massasoit</p>
+        </div>
+
+        <div>
+            <h3>PROJECTS</h3>
+            <div class="flex flex-col space-y-6 mt-4">
+                <div class="flex flex-col sm:flex-row sm:gap-6">
+                    <span
+                        class="text-sm text-gray-500 sm:w-16 shrink-0 sm:mt-0.5"
+                        >2026</span
+                    >
+                    <div class="flex flex-col">
+                        <a
+                            href="https://github.com/thomasha1310/your-repo"
+                            class="text-gray-200 font-medium hover:text-white transition-colors"
+                            target="_blank">tetragon</a
+                        >
+                        <p class="text-sm mt-1">
+                            a full-stack tournament logistics platform for
+                            real-time operations. used by the <a
+                                href="https://sharonmathscitourn.wixsite.com/smst"
+                                target="_blank"
+                                >sharon math and science tournament</a
+                            > for a 200+ person event.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row sm:gap-6">
+                    <span
+                        class="text-sm text-gray-500 sm:w-16 shrink-0 sm:mt-0.5"
+                        >2025</span
+                    >
+                    <div class="flex flex-col">
+                        <a
+                            href="https://github.com/thomasha1310/another-repo"
+                            class="text-gray-200 font-medium hover:text-white transition-colors"
+                            target="_blank">phishfence</a
+                        >
+                        <p class="text-sm mt-1">
+                            a phishing detection pipeline that explains its
+                            reasoning. achieved 99.3% accuracy on a custom
+                            dataset of 80,000+ emails.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h3>WRITEUPS</h3>
+            <div class="flex flex-col space-y-6 mt-4">
+                {
+                    sortedWriteups.map((post: Writeup) => (
+                        <div class="flex flex-col sm:flex-row sm:gap-6">
+                            <span class="text-sm text-gray-500 sm:w-16 shrink-0 sm:mt-0.5">
+                                {post.data.date
+                                    .toLocaleDateString("en-US", {
+                                        month: "short",
+                                        year: "2-digit",
+                                    })
+                                    .toLowerCase()}
+                            </span>
+                            <div class="flex flex-col">
+                                <a
+                                    href={`/writeups/${post.id}`}
+                                    class="text-gray-200 font-medium hover:text-white transition-colors"
+                                >
+                                    {post.data.title}
+                                </a>
+                                <p class="text-sm mt-1">
+                                    {post.data.description}
+                                </p>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
 </Layout>

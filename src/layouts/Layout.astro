@@ -1,26 +1,36 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
 const { title, description } = Astro.props;
 ---
 
-<html lang="en" class="antialiased bg-[#0a0a0a] text-gray-300 selection:bg-white selection:text-black">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>{title} • thomas ha</title>
-    <meta name="description" content={description} />
-  </head>
-  <body class="max-w-2xl mx-auto px-6 py-20 flex flex-col min-h-screen">    
-    <main class="grow">
-      <slot />
-    </main>
+<html
+    lang="en"
+    class="antialiased bg-[#0a0a0a] text-gray-300 selection:bg-white selection:text-black"
+>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>{title} • thomas ha</title>
+        <meta name="description" content={description} />
+    </head>
+    <body class="max-w-2xl mx-auto px-6 py-20 flex flex-col min-h-screen">
+        <main class="grow">
+            <slot />
+        </main>
 
-    <footer class="mt-20 text-sm text-gray-500 pb-8 flex justify-between">
-      <div class="flex gap-4">
-        <a href="mailto:hello@thomasha.me" class="hover:text-gray-300 transition-colors">email</a>
-        <a href="https://github.com/thomasha1310" target="_blank" class="hover:text-gray-300 transition-colors">github</a>
-        <a href="https://linkedin.com/in/thomasha1310" target="_blank" class="hover:text-gray-300 transition-colors">linkedin</a>
-      </div>
-    </footer>
-  </body>
+        <footer class="text-sm pb-8 pt-8">
+            <div class="flex gap-4">
+                <a href="mailto:hello@thomasha.me"> email </a>
+                <a href="https://github.com/thomasha1310" target="_blank">
+                    github
+                </a>
+                <a href="https://linkedin.com/in/thomasha1310" target="_blank">
+                    linkedin
+                </a>
+                <a href="/resume.pdf" rel="noopener noreferrer" target="_blank">
+                    résumé
+                </a>
+            </div>
+        </footer>
+    </body>
 </html>
