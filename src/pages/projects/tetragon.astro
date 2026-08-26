@@ -6,60 +6,80 @@ import Layout from "../../layouts/Layout.astro";
     title="tetragon"
     description="a full-stack tournament logistics platform for real-time operations."
 >
-    <div class="mt-8">
-        <a href="/" class="text-sm">return home </a>
-
-        <header class="mb-4 mt-4">
-            <p class="text-sm text-gray-500">2026</p>
-            <h1 class="mb-4">tetragon</h1>
-            <p>
-                a full-stack tournament logistics platform for real-time
-                operations.
-            </p>
-            <div
-                class="flex flex-wrap gap-x-4 gap-y-2 my-4 font-mono text-sm text-gray-500 lowercase"
+    <a href="/" class="text-sm">return home </a>
+    <header class="mb-4 mt-4">
+        <h4 class="text-sm text-gray-500">2026</h4>
+        <h1 class="mb-4">tetragon</h1>
+        <p>
+            a full-stack tournament logistics platform for real-time operations.
+        </p>
+        <div
+            class="flex flex-wrap gap-x-4 gap-y-2 my-4 font-mono text-sm text-gray-500 lowercase"
+        >
+            <span class="rounded border border-[#333] px-2 py-0.5">next.js</span
             >
-                <span class="rounded border border-[#333] px-2 py-0.5"
-                    >next.js</span
-                >
-                <span class="rounded border border-[#333] px-2 py-0.5"
-                    >typescript</span
-                >
-                <span class="rounded border border-[#333] px-2 py-0.5"
-                    >react</span
-                >
-                <span class="rounded border border-[#333] px-2 py-0.5"
-                    >supabase</span
-                >
-                <span class="rounded border border-[#333] px-2 py-0.5"
-                    >tailwindcss</span
-                >
-            </div>
-            <a
-                href="https://github.com/smst/tetragon"
-                target="_blank"
-                class="text-sm"
+            <span class="rounded border border-[#333] px-2 py-0.5"
+                >typescript</span
             >
+            <span class="rounded border border-[#333] px-2 py-0.5">react</span>
+            <span class="rounded border border-[#333] px-2 py-0.5"
+                >supabase</span
+            >
+            <span class="rounded border border-[#333] px-2 py-0.5"
+                >tailwindcss</span
+            >
+        </div>
+        <div class="flex gap-4 text-sm">
+            <a href="https://github.com/smst/tetragon" target="_blank">
                 github ↗
             </a>
-        </header>
+        </div>
+    </header>
 
-        <article>
-            <hr />
-            <h3>motivation</h3>
-            <hr />
-            <h3>architecture</h3>
-            <hr />
-            <h3>challenges</h3>
-            <hr />
-            <h3>outcome</h3>
-            <hr />
-            <div class="flex gap-4 text-sm">
-                <a href="https://github.com/smst/tetragon" target="_blank">
-                    github ↗
-                </a>
-                <a href="/">return home </a>
-            </div>
-        </article>
-    </div>
+    <article>
+        <hr />
+        <h3>motivation</h3>
+        <p>
+            Every year, running a 200-person math and science tournament
+            involves a chaotic web of Google Sheets, paper grading rubrics, and
+            manual data entry. When you have dozens of volunteers trying to
+            check in participants, grade individual and team rounds, and
+            calculate live scoreboards simultaneously, standard spreadsheets
+            buckle under the concurrency. Race conditions overwrite scores, and
+            calculating final results takes hours. Tetragon was engineered to
+            replace that fragile system with a unified, real-time logistics
+            dashboard.
+        </p>
+        <hr />
+        <h3>architecture</h3>
+        <p>
+            The platform is a Next.js application using the App Router, deployed
+            on Vercel. The entire backend—Postgres database, authentication, and
+            real-time state—is offloaded to Supabase.
+        </p>
+        <p>
+            Instead of a monolithic interface, the UI is heavily decoupled into
+            specialized modules based on the user's role. The dashboard routes
+            volunteers to specific views, such as the staff management panel,
+            proctor guide, or grading panel. When a proctor submits a score via
+            the individual or team grading components, the payload hits a
+            dedicated Next.js API route, which securely communicates with
+            Supabase.
+        </p>
+
+        <pre><code>Client (Proctor) --POST /api/calculate-scores--> Next.js API (Vercel)
+Next.js --> Supabase Postgres (Row-Level Security)
+Supabase --Realtime Subscription--> Client (ScoreboardPanel)</code></pre>
+        <hr />
+        <h3>challenges</h3>
+        <hr />
+        <h3>outcome</h3>
+        <hr />
+        <div class="flex gap-4 text-sm">
+            <a href="https://github.com/smst/tetragon" target="_blank">
+                github ↗
+            </a>
+            <a href="/">return home </a>
+        </div>
+    </article>
 </Layout>

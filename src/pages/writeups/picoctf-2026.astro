@@ -1,0 +1,61 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout
+    title="picoctf 2026"
+    description="competing as sharon cyber. top 3% team globally."
+>
+    <a href="/" class="text-sm">return home </a>
+    <header class="mb-4 mt-4">
+        <h4 class="text-sm text-gray-500">mar 2026</h4>
+        <h1 class="mb-4">picoctf 2026</h1>
+        <p>competing as sharon cyber. top 3% team globally.</p>
+        <div
+            class="flex flex-wrap gap-x-4 gap-y-2 my-4 font-mono text-sm text-gray-500 lowercase"
+        >
+            <span class="rounded border border-[#333] px-2 py-0.5">ctfs</span>
+            <span class="rounded border border-[#333] px-2 py-0.5"
+                >cryptography</span
+            >
+        </div>
+        <div class="flex gap-4 text-sm">
+            <a href="https://github.com/smst/tetragon" target="_blank">
+                github ↗
+            </a>
+        </div>
+    </header>
+
+    <article>
+        <hr />
+        <h3>debrief</h3>
+        <p>
+            <a href="https://learn.cylabacademy.org/teams/17496" target="_blank"
+                >Our team
+            </a> closed out picoCTF 2026 with 13,500 of 14,500 available points, placing
+            us in the top 3% of teams globally. We struggled to solve the most difficult
+            reverse engineering and web exploitation challenges (JITFP and paper-2,
+            respectively), but we were able to solve every other challenge in the
+            competition.
+        </p>
+        <p>
+            I found two cryptography challenges particularly interesting. One
+            makes use of a sloppy weakness in a particular implementation of
+            RSA, and the other involved abusing lattice-based cryptography.
+        </p>
+        <hr />
+        <h3>writeup: clusterrsa</h3>
+        <p>Traditional RSA implementations rely on a modulus N = p * q.</p>
+        <hr />
+        <h3>writeup: NotTRUe</h3>
+        <hr />
+        <h3>outcome</h3>
+        <hr />
+        <div class="flex gap-4 text-sm">
+            <a href="https://github.com/smst/tetragon" target="_blank">
+                github ↗
+            </a>
+            <a href="/">return home </a>
+        </div>
+    </article>
+</Layout>

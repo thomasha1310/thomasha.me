@@ -2,18 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
-type ContentItem = CollectionEntry<"writeups"> | CollectionEntry<"projects">;
+type Writeup = CollectionEntry<"writeups">;
 
 const writeups = await getCollection("writeups");
 const sortedWriteups = writeups.sort(
-    (a: ContentItem, b: ContentItem) =>
-        b.data.date.valueOf() - a.data.date.valueOf(),
-);
-
-const projects = await getCollection("projects");
-const sortedProjects = projects.sort(
-    (a: ContentItem, b: ContentItem) =>
-        b.data.date.valueOf() - a.data.date.valueOf(),
+    (a: Writeup, b: Writeup) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
 ---
 
@@ -122,32 +115,25 @@ const sortedProjects = projects.sort(
         <div>
             <h3>WRITEUPS</h3>
             <div class="flex flex-col space-y-6 mt-4">
-                {
-                    sortedWriteups.map((post: ContentItem) => (
-                        <div class="flex flex-col sm:flex-row sm:gap-6">
-                            <span class="text-sm text-gray-500 sm:w-16 shrink-0 sm:mt-0.5">
-                                {post.data.date
-                                    .toLocaleDateString("en-US", {
-                                        month: "short",
-                                        year: "numeric",
-                                        timeZone: "UTC",
-                                    })
-                                    .toLowerCase()}
-                            </span>
-                            <div class="flex flex-col">
-                                <a
-                                    href={`/writeups/${post.id}`}
-                                    class="text-gray-200 font-medium hover:text-white transition-colors"
-                                >
-                                    {post.data.title}
-                                </a>
-                                <p class="text-sm mt-1">
-                                    {post.data.description}
-                                </p>
-                            </div>
-                        </div>
-                    ))
-                }
+                <div class="flex flex-col sm:flex-row sm:gap-6">
+                    <span
+                        class="text-sm text-gray-500 sm:w-16 shrink-0 sm:mt-0.5"
+                        >mar 2026</span
+                    >
+                    <div class="flex flex-col">
+                        <a
+                            href="/writeups/picoctf-2026"
+                            class="text-gray-200 font-medium hover:text-white transition-colors"
+                        >
+                            picoctf 2026
+                        </a>
+                        <p class="text-sm mt-1">
+                            sharon high school cybersecurity club, competing as
+                            sharon cyber. top 3% team globally. earned 13500 of
+                            14500 available points.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

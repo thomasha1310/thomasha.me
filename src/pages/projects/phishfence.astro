@@ -1,0 +1,181 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout
+    title="phishfence"
+    description="a full-stack tournament logistics platform for real-time operations."
+>
+    <a href="/" class="text-sm">return home </a>
+    <header class="mb-4 mt-4">
+        <h4 class="text-sm text-gray-500">2025</h4>
+        <h1 class="mb-4">phishfence</h1>
+        <p>a phishing detection pipeline that explains its reasoning.</p>
+        <div
+            class="flex flex-wrap gap-x-4 gap-y-2 my-4 font-mono text-sm text-gray-500 lowercase"
+        >
+            <span class="rounded border border-[#333] px-2 py-0.5">python</span>
+            <span class="rounded border border-[#333] px-2 py-0.5"
+                >machine learning</span
+            >
+            <span class="rounded border border-[#333] px-2 py-0.5"
+                >phishing</span
+            >
+        </div>
+        <div class="flex gap-4 text-sm">
+            <a
+                href="https://github.com/thomasha1310/phishfence"
+                target="_blank"
+            >
+                github ↗
+            </a>
+            <a
+                href="https://www.bu.edu/summer/files/2025/10/Pract-2_Group-12_Poster.pdf"
+                target="_blank"
+            >
+                poster ↗
+            </a>
+        </div>
+        <p class="text-sm text-gray-500 italic">
+            built at the 2025 boston university research in science and
+            engineering program.
+        </p>
+    </header>
+
+    <article>
+        <hr />
+        <h3>motivation</h3>
+        <p>
+            Everyone knows that phishing emails are dangerous. We also know that
+            machine learning can be used to detect them. However, most phishing
+            detection pipelines are black boxes. They can tell you whether an
+            email is phishing or not, but they don't explain why, forcing
+            vulnerable individuals to blindly trust a model's output.
+        </p>
+        <p>
+            At the BU RISE program, my partners and I built PhishFence to
+            mitigate this problem by matching modern phishing classifiers on
+            accuracy while also providing a human-readable explanation of its
+            reasoning. This explanation is our primary research goal.
+        </p>
+        <p>
+            Of course, a well-designed pipeline is only as good as the data it
+            is trained on. My work focused on curating a dataset and processing
+            it into a workable format for training and evaluation.
+        </p>
+
+        <hr />
+        <h3>data preparation</h3>
+        <p>
+            The most well-known online corpus of emails is the Enron corpus,
+            which consists of mostly legitimate emails. We also added several
+            datasets to supplement the number of phishing emails, including the
+            Nazario corpus, for a <a
+                href="https://github.com/thomasha1310/phishfence/blob/main/data/input/SOURCES.md"
+                target="_blank">total of six publicly available datasets</a
+            >.
+        </p>
+        <p>
+            Although we were able to obtain a CSV file of each dataset, we found
+            that many of the datasets had extraneous columns that were either
+            not shared with the other datasets or were irrelevant to our task.
+            We trimmed each dataset to include only the <code>subject</code>, <code
+                >code</code
+            >, and <code>label</code> columns.
+        </p>
+        <p>
+            All duplicate rows and rows with missing values were removed. The
+            six trimmed datasets were then concatenated into a single file
+            containing 82,138 entries, of which 39,527 (48%) were legitimate and
+            42,611 (52%) were phishing. This roughly even split mitigates the
+            risk of biasing the model toward one class or the other.
+        </p>
+        <p>
+            After initial testing, we determined that the Enron corpus, which
+            comprised 29,767 entries (roughly 36%) of the total dataset, was too
+            large and was skewing the model's performance. In particular, when
+            using LIME to explain model behaviors, the word "Enron" consistently
+            appeared as a top indicator for legitimate emails. This, of course,
+            corresponds with the fact that the Enron corpus as a whole is
+            heavily biased toward legitimate emails containing the word "Enron".
+        </p>
+        <p>
+            To prevent overfitting to our specific dataset, we replaced all
+            instances of the word "Enron" in the original Enron corpus with a
+            randomly selected company from the Fortune 500 list of companies
+            before recompiling the full dataset. After further analysis, we
+            concluded that this successfully mitigated the bias.
+        </p>
+
+        <hr />
+        <h3>outcome</h3>
+        <p>
+            After training the model using an 80/20 train-test split, we found
+            that our pipeline achieved 99.3% accuracy, with precision and recall
+            both above 99%, matching the performance of leading classifiers.
+            More importantly, our explanability layer was able to provide
+            human-readable explanations for each classification decision.
+        </p>
+        <p>
+            We presented our results at the RISE Poster Symposium, where we
+            showcased a web app where a user pastes in an email for
+            classification and explanation.
+        </p>
+
+        <hr />
+        <h3>limitations</h3>
+        <p>
+            When building a dataset for phishing, one major consideration is the
+            ratio of legitimate to phishing emails. <a
+                href="https://developers.google.com/machine-learning/crash-course/overfitting/imbalanced-datasets"
+                target="_blank"
+                >Class imbalance can lead to heavily skewed models</a
+            >, but artificially balancing the dataset can also lead to
+            prediction bias. In our case, we chose to use a larger set of
+            phishing emails to better capture the diverse nature of phishing
+            attacks. As a result, we must understand that the resulting model
+            may be biased toward predicting phishing emails.
+        </p>
+        <p>
+            Additionally, our final pipeline makes use of Google's BERT language
+            model, which can only read 512 tokens at a time. This means that we
+            had to chunk longer emails, causing degraded context understanding
+            and potentially decreased accuracy for longer emails.
+        </p>
+        <p>
+            Our dataset also present inherent limitations: all the emails are in
+            English, and the training corpus is static. This means that the
+            model may not generalize well to other languages or to new phishing
+            techniques that emerge after the dataset was compiled. As a
+            proof-of-concept, PhishFence is a strong starting point, but it is
+            not a production-ready system.
+        </p>
+
+        <hr />
+        <h3>future work</h3>
+        <p>
+            Future research could focus on expanding the training data to
+            include more languages and more recent phishing attacks.
+            Additionally, the model could be improved to handle longer emails
+            without chunking, perhaps by using a different architecture or by
+            fine-tuning BERT for longer sequences. Finally, user studies could
+            be conducted to evaluate the effectiveness of PhishFence's
+            explanations in helping users make informed decisions about
+            potential phishing emails.
+        </p>
+
+        <hr />
+        <div class="flex gap-4 text-sm">
+            <a href="https://github.com/smst/phishfence" target="_blank">
+                github ↗
+            </a>
+            <a
+                href="https://www.bu.edu/summer/files/2025/10/Pract-2_Group-12_Poster.pdf"
+                target="_blank"
+            >
+                poster ↗
+            </a>
+            <a href="/">return home </a>
+        </div>
+    </article>
+</Layout>
