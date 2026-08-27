@@ -46,22 +46,26 @@ import Layout from "../../layouts/Layout.astro";
         <hr />
         <h2>motivation</h2>
         <p>
-            Everyone knows that phishing emails are dangerous. We also know that
-            machine learning can be used to detect them. However, most phishing
-            detection pipelines are black boxes. They can tell you whether an
-            email is phishing or not, but they don't explain why, forcing
-            vulnerable individuals to blindly trust a model's output.
+            Everyone knows that phishing emails are dangerous, and while machine
+            learning is highly effective at detecting them, most modern
+            pipelines act as black boxes. They output a binary decision without
+            explaining why, forcing vulnerable individuals to blindly trust the
+            algorithm.
         </p>
         <p>
-            At the BU RISE program, my partners and I built PhishFence to
-            mitigate this problem by matching modern phishing classifiers on
-            accuracy while also providing a human-readable explanation of its
-            reasoning. This explanation is our primary research goal.
+            At the BU RISE program, my partners and I built PhishFence: a
+            detection pipeline that matches the accuracy of leading classifiers
+            while also providing human-readable explanations for its decisions.
         </p>
         <p>
-            Of course, a well-designed pipeline is only as good as the data it
-            is trained on. My work focused on curating a dataset and processing
-            it into a workable format for training and evaluation.
+            Because of the scale of our project, we divided the work, and while
+            my teammates focused on fine-tuning a BERT classifier and
+            integrating LIME and SHAP with Gemini to generate user-friendly
+            explanations, I focused on preparing the foundation. An explainable
+            model is only as robust as the data it is trained on; if the
+            training data is biased, the model will be too. Therefore, my work
+            focused on curating, cleaning, and processing a diverse dataset that
+            made our pipeline reliable.
         </p>
 
         <hr />

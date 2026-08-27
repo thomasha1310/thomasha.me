@@ -97,6 +97,12 @@ print(flag.decode())
 
 ## Not TRUe
 
+### Reconnaisance
+
+### Mathematical Reasoning
+
+### Exploit
+
 ---
 
 ## outcome
