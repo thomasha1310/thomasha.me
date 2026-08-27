@@ -1,13 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
-
-type Writeup = CollectionEntry<"writeups">;
-
-const writeups = await getCollection("writeups");
-const sortedWriteups = writeups.sort(
-    (a: Writeup, b: Writeup) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
 ---
 
 <Layout
@@ -45,7 +37,7 @@ const sortedWriteups = writeups.sort(
         </p>
 
         <div>
-            <h3>CURRENTLY</h3>
+            <h2>CURRENTLY</h2>
             <p>
                 <a
                     href="https://github.com/thomasha1310/clox-interpreter"
@@ -58,14 +50,14 @@ const sortedWriteups = writeups.sort(
         </div>
 
         <div>
-            <h3>COURSEWORK</h3>
+            <h2>COURSEWORK</h2>
             <p>csci 0190 (accelerated intro to computer science) @ brown</p>
             <p>math 0540 (linear algebra with theory) @ brown</p>
             <p>math 230 (differential equations) @ massasoit</p>
         </div>
 
         <div>
-            <h3>PROJECTS</h3>
+            <h2>PROJECTS</h2>
             <div class="flex flex-col space-y-6 mt-4">
                 <div class="flex flex-col sm:flex-row sm:gap-6">
                     <span
@@ -113,7 +105,7 @@ const sortedWriteups = writeups.sort(
         </div>
 
         <div>
-            <h3>WRITEUPS</h3>
+            <h2>WRITEUPS</h2>
             <div class="flex flex-col space-y-6 mt-4">
                 <div class="flex flex-col sm:flex-row sm:gap-6">
                     <span

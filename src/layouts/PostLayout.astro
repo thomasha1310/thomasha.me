@@ -1,0 +1,55 @@
+---
+import "katex/dist/katex.min.css";
+import Layout from "./Layout.astro";
+
+const { title, description, date, tags, links } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+    <a href="/" class="text-sm">return home </a>
+    <header class="mb-4 mt-4">
+        <h4 class="text-sm text-gray-500">{date}</h4>
+        <h1 class="mb-4">{title}</h1>
+        <p>{description}</p>
+        <div
+            class="flex flex-wrap gap-x-4 gap-y-2 my-4 font-mono text-sm text-gray-500 lowercase"
+        >
+            {
+                tags.map((tag: string) => (
+                    <span class="rounded border border-[#333] px-2 py-0.5">
+                        {tag}
+                    </span>
+                ))
+            }
+        </div>
+        {
+            links && links.length > 0 && (
+                <div class="flex gap-4 text-sm">
+                    {links.map((link: { label: string; url: string }) => (
+                        <a href={link.url} target="_blank">
+                            {link.label} ↗
+                        </a>
+                    ))}
+                </div>
+            )
+        }
+    </header>
+
+    <article>
+        <hr />
+        <slot />
+        <hr />
+        <div class="flex gap-4 text-sm">
+            {
+                links &&
+                    links.length > 0 &&
+                    links.map((link: { label: string; url: string }) => (
+                        <a href={link.url} target="_blank">
+                            {link.label} ↗
+                        </a>
+                    ))
+            }
+            <a href="/">return home </a>
+        </div>
+    </article>
+</Layout>

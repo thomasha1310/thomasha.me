@@ -7,11 +7,11 @@
     }
 
     h2 {
-        @apply text-lg font-medium text-gray-300;
+        @apply text-xs tracking-widest uppercase font-light text-gray-400 mb-4;
     }
 
     h3 {
-        @apply text-xs tracking-widest uppercase font-light text-gray-400 mb-4;
+        @apply text-lg mb-4 italic text-gray-300;
     }
 
     p {
