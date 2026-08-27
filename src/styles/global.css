@@ -45,4 +45,9 @@
     :not(pre) > code::after {
         content: none !important;
     }
+
+    .katex,
+    .katex-display {
+        @apply text-gray-400;
+    }
 }

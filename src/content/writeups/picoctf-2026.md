@@ -39,21 +39,29 @@ p3 = 9671406556917033398439721
 p4 = 9671406556917033398454847
 ```
 
-In fact, these 4 primes are all _clustered_ around the same value!
-
 ### Mathematical Reasoning
 
-Traditional RSA cryptosystems rely on a large modulus $N = p \times q$, where $p$ and $q$ are two large, distinct prime numbers (typically 1024 bits each). By using an $N$ over 80% smaller than normal, the given cryptosystem makes $N$ much more trivial to compute. Furthermore, by using several primes ($N = p_1 \times p_2 \times p_3 \times p_4$) without increasing the bit-length of the modulus, the bit-length of each individual prime shrinks significantly. In this case, the bit-length of each individual prime is just over 80 bits, significantly less than the standard bit length of 1024.
+Traditional RSA cryptosystems rely on a large modulus $N = p \times q$, where $p$ and $q$ are two large, distinct prime numbers (typically 1024 bits each). By using an $N$ over 80% smaller than normal than the standard 2048-bit modulus, the given cryptosystem is inherently weakened.
 
-Because the individual primes were sufficiently small, it is trivial to factor the modulus using standard factorization algorithms.
+In addition, the challenge uses a multi-prime architecture ($N = p_1 \times p_2 \times p_3 \times p_4$), reducing the bit-length of each individual prime to roughly 80 bits. More importantly, these four primes are clustered, meaning the variance between them is negligibly small. Given four clustered prime factors, we can estimate that each factor will be roughly around the fourth root of $N$.
+
+By starting with the search term $s = \sqrt[4]{N} \approx 9671406556917033398285235$, we can run a brute force search for factors of $N$.
+
+Fortunately, since FactorDB already has $N$'s factorization, we don't need to do the brute forcing ourselves.
 
 ### Exploit
 
 Once $N$ is factored, constructing the exploit is easy. Rather than using the standard Euler's totient function $\phi(N) = (p - 1)(q - 1)$, we compute $\phi(N)$ as the product of one less than each of the prime components:
-$$\phi(N) = \prod_{i = 1}^{4}(p_i - 1)$$
+
+$$
+\phi(N) = \prod_{i = 1}^{4}(p_i - 1)
+$$
 
 Given $\phi(N)$, calculating the private key is trivial:
-$$d \equiv e^{-1} \pmod{\phi(N)}$$
+
+$$
+d \equiv e^{-1} \pmod{\phi(N)}
+$$
 
 We wrote a Python script to automate the decryption:
 
