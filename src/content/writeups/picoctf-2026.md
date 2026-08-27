@@ -22,7 +22,7 @@ I found two cryptography challenges particularly interesting. [One](https://lear
 
 ### Reconnaisance
 
-In any [RSA](https://en.wikipedia.org/wiki/RSA_cryptosystem) challenge, the first step is checking $N$ for weaknesses. We are directly given $N$ and $e$, saving us the extra work of extracing them:
+In any [RSA](https://en.wikipedia.org/wiki/RSA_cryptosystem) challenge, the first step is checking $N$ for weaknesses. We are directly given $N$ and $e$:
 
 ```
 n = 8749002899132047699790752490331099938058737706735201354674975134719667510377522805717156720453193651
@@ -43,7 +43,7 @@ In fact, these 4 primes are all _clustered_ around the same value!
 
 ### Mathematical Reasoning
 
-Traditional RSA cryptosystems rely on a large modulus $N = p \times q$, where $p$ and $q$ are two large, distinct prime numbers (typically 1024 bits each). By using an $N$ over 80% smaller than normal, the given cryptosystem makes $N$ much more trivial to compute. Furthermore, by using several primes ($N = p_1 \times p_2 \times p_3 \times p_4$) without increasing the bit-length of the modulus, the bit-length of each individual prime shrinks roughly in half.
+Traditional RSA cryptosystems rely on a large modulus $N = p \times q$, where $p$ and $q$ are two large, distinct prime numbers (typically 1024 bits each). By using an $N$ over 80% smaller than normal, the given cryptosystem makes $N$ much more trivial to compute. Furthermore, by using several primes ($N = p_1 \times p_2 \times p_3 \times p_4$) without increasing the bit-length of the modulus, the bit-length of each individual prime shrinks significantly. In this case, the bit-length of each individual prime is just over 80 bits, significantly less than the standard bit length of 1024.
 
 Because the individual primes were sufficiently small, it is trivial to factor the modulus using standard factorization algorithms.
 
